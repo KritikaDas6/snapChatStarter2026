@@ -104,7 +104,7 @@ export default function CameraScreen({ navigation, focused }) {
         console.error("Error inserting photo:", error.message);
       }
       // This part is to store images in a folder bucket named "pictureStorage"
-      //uploadImage(newPhoto.uri);
+      uploadImage(newPhoto.uri);
     }
   }
 

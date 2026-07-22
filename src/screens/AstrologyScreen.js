@@ -1,6 +1,6 @@
 import { Image, Text, View, StyleSheet, ScrollView } from "react-native";
 import { useState, useEffect } from "react";
-// import { findAstrologySign } from "../../utils/hooks/findAstrologySign";
+// import { findAstrologySign } from "../../utils/hooks/findAstrologySign"; //uncommented out - A.N.
 
 const requestOptions = {
   method: "GET",

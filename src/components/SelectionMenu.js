@@ -6,7 +6,7 @@ import { useNavigation} from '@react-navigation/native';
 
 
 const SelectionMenu = ({ showMenu, setShowMenu }) => {
-  // const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false); // commented back in - A.N.
   const navigation = useNavigation();
   const list = [
     {
