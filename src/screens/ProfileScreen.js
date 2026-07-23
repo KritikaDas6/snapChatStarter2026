@@ -22,6 +22,15 @@ const BITMOJI = require("../../assets/snapchat/personalBitmoji.png");
 const GHOST = require("../../assets/snapchat/ghostlogo.png");
 const DEFAULT_AVATAR = require("../../assets/snapchat/defaultprofile.png");
 
+// Profile avatars used in "My Groups" below
+const JOSH_AVATAR = require("../../assets/profiles/josh-gada.png");
+const LOLA_AVATAR = require("../../assets/profiles/lola-rae.png");
+const CINDY_AVATAR = require("../../assets/profiles/cindy-lu.png");
+const JENNIFER_AVATAR = require("../../assets/profiles/jennifer-nguyen.png");
+const ISABELLA_AVATAR = require("../../assets/profiles/isabella.png");
+const CASSIE_AVATAR = require("../../assets/profiles/cassie-lu.png");
+const WENDY_AVATAR = require("../../assets/profiles/wendy.png");
+
 const INTEREST_CHIPS = [
   { key: "school", emoji: "🎓", label: "UC Berkeley" },
   { key: "music", emoji: "🩰", label: "Ballet" },
@@ -55,29 +64,17 @@ const GROUPS = [
   {
     id: "1",
     name: "SoCal SnapMates ☀️",
-    avatars: [
-      "https://i.imgur.com/FxsJ3xy.jpg",
-      "https://sdk.bitmoji.com/render/panel/20048676-103221902646_4-s5-v1.png?transparent=1&palette=1&scale=1",
-      "https://i.imgur.com/FxsJ3xy.jpg",
-    ],
+    avatars: [JOSH_AVATAR, CINDY_AVATAR, JENNIFER_AVATAR],
   },
   {
     id: "2",
     name: "Salsa Dancers 💃",
-    avatars: [
-      "https://sdk.bitmoji.com/render/panel/20048676-103221902646_4-s5-v1.png?transparent=1&palette=1&scale=1",
-      "https://i.imgur.com/FxsJ3xy.jpg",
-      "https://sdk.bitmoji.com/render/panel/20048676-103221902646_4-s5-v1.png?transparent=1&palette=1&scale=1",
-    ],
+    avatars: [LOLA_AVATAR, ISABELLA_AVATAR, WENDY_AVATAR],
   },
   {
     id: "3",
     name: "Gym Crew 💪",
-    avatars: [
-      "https://i.imgur.com/FxsJ3xy.jpg",
-      "https://sdk.bitmoji.com/render/panel/20048676-103221902646_4-s5-v1.png?transparent=1&palette=1&scale=1",
-      "https://i.imgur.com/FxsJ3xy.jpg",
-    ],
+    avatars: [JOSH_AVATAR, JENNIFER_AVATAR, CASSIE_AVATAR],
   },
 ];
 
@@ -104,10 +101,10 @@ function GroupBubble({ group }) {
   return (
     <View style={styles.groupItem}>
       <View style={styles.groupCircle}>
-        {group.avatars.map((uri, index) => (
+        {group.avatars.map((source, index) => (
           <Image
             key={`${group.id}-${index}`}
-            source={{ uri }}
+            source={source}
             style={[
               styles.groupAvatar,
               index === 0 && styles.groupAvatarTop,
