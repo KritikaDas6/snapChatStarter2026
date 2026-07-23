@@ -9,7 +9,7 @@ import BasicChatbot from "../chatbots/BasicChatbot";
 export const CHATBOTS = {
   BasicChatbot: {
     id: "BasicChatbot",
-    name: "React Native Chatbot",
+    name: "Salsa Dancers",
     imageUrl: "https://loremflickr.com/140/140",
     component: BasicChatbot,
   },

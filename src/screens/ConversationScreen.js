@@ -13,8 +13,8 @@ import {
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-export default function ConversationScreen({ route }) {
-  const { chatbotName } = route.params;
+export default function ConversationScreen({ navigation, route }) {
+  const chatbotName = route.params?.chatbotName ?? "Salsa Dancers";
 
   const [message, setMessage] = useState("");
 
@@ -22,17 +22,31 @@ export default function ConversationScreen({ route }) {
     {
       id: "1",
       sender: "bot",
-      name: chatbotName,
-      text: "Hi Sarah",
-      color: "#00A7B5",
+      name: "DAILY PROMPT",
+      text: "What is your favorite salsa style? LA, New York, Cuban, or Colombian? 💃✨",
+      color: "#BEBC00",
     },
     {
       id: "2",
       sender: "me",
       name: "ME",
-      text: "hi bob",
+      text: "My wife and I ❤️ LA style!!",
       color: "#FF2D55",
     },
+    {
+      id: "3",
+      sender: "bot",
+      name: "Bobby",
+      text: "hmm, new yooork all the way 🗽🗽",
+      color: "hsl(110, 63%, 52%)",
+    },
+    {
+      id: "3",
+      sender: "bot",
+      name: "Doug",
+      text: "Colombian for me! 💃🇨🇴",
+      color: "#33BBFF",
+    }
   ]);
 
   const listRef = useRef();
@@ -54,15 +68,13 @@ export default function ConversationScreen({ route }) {
     setMessage("");
   }
 
-  function renderMessage({ item }) {
+function renderMessage({ item }) {
     return (
       <View style={styles.messageWrapper}>
         <Text
           style={[
             styles.sender,
-            {
-              color: item.color,
-            },
+            { color: item.color, textTransform: "uppercase" },
           ]}
         >
           {item.name}
@@ -73,6 +85,7 @@ export default function ConversationScreen({ route }) {
             styles.messageRow,
             {
               borderLeftColor: item.color,
+              backgroundColor: item.name === "DAILY PROMPT" ? "#F2F2F2" : "transparent"
             },
           ]}
         >
@@ -84,23 +97,32 @@ export default function ConversationScreen({ route }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* HEADER */}
-
-      {/* <View style={styles.header}>
-        <Ionicons name="chevron-back" size={32} />
+      <View style={styles.header}>
+        <TouchableOpacity
+          accessibilityLabel="Go back"
+          hitSlop={8}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="chevron-back" size={30} color="#111" />
+        </TouchableOpacity>
 
         <View style={styles.avatar}>
-          <Text>🙂</Text>
+          <Text style={styles.avatarEmoji}>💃</Text>
         </View>
 
-        <Text style={styles.username}>{chatbotName}</Text>
+        <Text numberOfLines={1} style={styles.username}>
+          {chatbotName}
+        </Text>
 
         <View style={styles.headerIcons}>
-          <Ionicons name="call" size={23} />
-
-          <Ionicons name="videocam" size={25} />
+          <TouchableOpacity accessibilityLabel="Start an audio call" hitSlop={8}>
+            <Ionicons name="call-outline" size={24} color="#111" />
+          </TouchableOpacity>
+          <TouchableOpacity accessibilityLabel="Start a video call" hitSlop={8}>
+            <Ionicons name="videocam-outline" size={26} color="#111" />
+          </TouchableOpacity>
         </View>
-      </View> */}
+      </View>
 
       <KeyboardAvoidingView
         style={{ flex: 1 }}
@@ -181,6 +203,10 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 
+  avatarEmoji: {
+    fontSize: 22,
+  },
+
   username: {
     fontSize: 20,
     fontWeight: "700",
@@ -202,15 +228,18 @@ const styles = StyleSheet.create({
     marginVertical: 7,
   },
 
-  sender: {
+sender: {
     fontSize: 13,
-    fontWeight: "700",
-    marginBottom: 3,
+    fontWeight: "800",
+    marginBottom: 4,
+    letterSpacing: 0.5, // Adds a tiny bit of space between the uppercase letters
   },
 
   messageRow: {
-    borderLeftWidth: 3,
-    paddingLeft: 8,
+    borderLeftWidth: 6, // Makes the colored bar thicker
+    paddingLeft: 10, // Space between the colored bar and the text
+    paddingVertical: 10, // Space above and below the text
+    // MAKE SURE THERE IS NO borderRadius HERE!
   },
 
   messageText: {
