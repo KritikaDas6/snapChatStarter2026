@@ -68,8 +68,17 @@ const GROUPS = [
   },
   {
     id: "2",
+<<<<<<< HEAD
     name: "Fashionistas 👗",
     avatars: [LOLA_AVATAR, ISABELLA_AVATAR, WENDY_AVATAR],
+=======
+    name: "Salsa Dancers 💃",
+    avatars: [
+      "https://sdk.bitmoji.com/render/panel/20048676-103221902646_4-s5-v1.png?transparent=1&palette=1&scale=1",
+      "https://i.imgur.com/FxsJ3xy.jpg",
+      "https://sdk.bitmoji.com/render/panel/20048676-103221902646_4-s5-v1.png?transparent=1&palette=1&scale=1",
+    ],
+>>>>>>> main
   },
   {
     id: "3",
