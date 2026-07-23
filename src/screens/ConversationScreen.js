@@ -41,7 +41,7 @@ export default function ConversationScreen({ navigation, route }) {
       color: "hsl(110, 63%, 52%)",
     },
     {
-      id: "3",
+      id: "4",
       sender: "bot",
       name: "Doug",
       text: "Colombian for me! 💃🇨🇴",
