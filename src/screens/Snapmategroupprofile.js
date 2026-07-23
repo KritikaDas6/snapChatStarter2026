@@ -29,7 +29,7 @@ export default function GroupChatProfile({ route, navigation }) {
       { id: "2", name: "Isabella", avatar: ISABELLA_AVATAR, online: true },
       { id: "3", name: "Wendy", avatar: WENDY_AVATAR, online: true },
     ],
-    hashtags = ["#Brunch", "#Vogue", "#DinnerParties", "#LABaddies"],
+    hashtags = ["Dance", "Vogue", "DinnerParties", "Spanish"],
     matchLabel = "SnapMates Match",
     snapcodeUri = null,
     streak = 111,
