@@ -51,7 +51,7 @@ const PINNED_GROUPS = [
   },
   {
     id: "fashionistas",
-    name: "Fashionistas 👗",
+    name: "Salsa Dancers 💃",
     avatars: [LOLA, WENDY, CASSIE],
   },
 ];
