@@ -37,7 +37,7 @@ export default function App() {
         <Stack.Screen
           name="Conversation"
           component={ConversationScreen}
-          options={{ headerShown: true }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="DiscoverCard"
