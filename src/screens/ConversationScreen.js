@@ -106,13 +106,23 @@ function renderMessage({ item }) {
           <Ionicons name="chevron-back" size={30} color="#111" />
         </TouchableOpacity>
 
-        <View style={styles.avatar}>
-          <Text style={styles.avatarEmoji}>💃</Text>
-        </View>
+        <TouchableOpacity
+          accessibilityLabel={`Open ${chatbotName} profile`}
+          style={styles.headerTitleButton}
+          onPress={() =>
+            navigation.navigate("Snapmategroupprofile", {
+              groupName: chatbotName,
+            })
+          }
+        >
+          <View style={styles.avatar}>
+            <Text style={styles.avatarEmoji}>💃</Text>
+          </View>
 
-        <Text numberOfLines={1} style={styles.username}>
-          {chatbotName}
-        </Text>
+          <Text numberOfLines={1} style={styles.username}>
+            {chatbotName}
+          </Text>
+        </TouchableOpacity>
 
         <View style={styles.headerIcons}>
           <TouchableOpacity accessibilityLabel="Start an audio call" hitSlop={8}>
@@ -191,6 +201,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 12,
+  },
+
+  headerTitleButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
   },
 
   avatar: {

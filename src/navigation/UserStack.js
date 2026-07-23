@@ -11,6 +11,7 @@ import FriendStory from "../screens/FriendStory";
 import AstrologyScreen from "../screens/AstrologyScreen";
 import MemoryScreen from "../screens/MemoryScreen";
 import EventScreen from "../screens/EventScreen"; //New component by Sona and Christian
+import SnapmategroupprofileScreen from "../screens/Snapmategroupprofile";
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,11 @@ export default function App() {
           name="Conversation"
           component={ConversationScreen}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Snapmategroupprofile"
+          component={SnapmategroupprofileScreen}
+          options={{ headerShown: true }}
         />
         <Stack.Screen
           name="DiscoverCard"
