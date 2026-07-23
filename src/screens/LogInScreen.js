@@ -15,20 +15,34 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordLength, setPasswordLength] = useState(0);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   async function handleSubmit() {
-    // console.log("handle submit invoked!!");
+    if (submitting) return;
 
-    const { user, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    setErrorMessage("");
+    setSubmitting(true);
 
-    if (error) {
-      console.error("Error logging in:", error.message);
-    } else {
-      // console.log("User signed in:", user);
-      // Navigate to a different screen or handle successful login
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      });
+
+      if (error) {
+        setErrorMessage(error.message);
+        console.error("Error logging in:", error.message);
+        return;
+      }
+
+      if (!data.session) {
+        setErrorMessage(
+          "Login succeeded but no session was returned. Check your Supabase email confirmation settings.",
+        );
+      }
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -37,6 +51,9 @@ export default function LoginScreen({ navigation }) {
       <ReturnButton navigation={navigation} returnName="AuthHome" />
       <Text style={styles.logInTitle}>Log In</Text>
       <View style={styles.logInFields}>
+        {errorMessage ? (
+          <Text style={styles.errorText}>{errorMessage}</Text>
+        ) : null}
         <Text style={styles.inputText}>USERNAME OR EMAIL</Text>
         <TextInput
           style={styles.inputField}
@@ -56,8 +73,14 @@ export default function LoginScreen({ navigation }) {
         />
       </View>
       {passwordLength >= 4 && (
-        <TouchableOpacity style={styles.logInBtn} onPress={handleSubmit}>
-          <Text style={styles.logInText}>Log In</Text>
+        <TouchableOpacity
+          style={[styles.logInBtn, submitting && styles.logInBtnDisabled]}
+          onPress={handleSubmit}
+          disabled={submitting}
+        >
+          <Text style={styles.logInText}>
+            {submitting ? "Logging In..." : "Log In"}
+          </Text>
         </TouchableOpacity>
       )}
     </View>
@@ -110,5 +133,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "600",
     color: "#FFF",
+  },
+  logInBtnDisabled: {
+    opacity: 0.7,
+  },
+  errorText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "red",
+    marginBottom: 12,
+    textAlign: "center",
   },
 });

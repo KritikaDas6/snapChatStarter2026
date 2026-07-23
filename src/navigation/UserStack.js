@@ -13,6 +13,8 @@ import MemoryScreen from "../screens/MemoryScreen";
 import EventScreen from "../screens/EventScreen"; //New component by Sona and Christian
 import SnapmategroupprofileScreen from "../screens/Snapmategroupprofile";
 
+
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -23,7 +25,7 @@ export default function App() {
         <Stack.Screen
           name="Profile"
           component={ProfileScreen}
-          options={{ headerShown: true }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="FriendStory"

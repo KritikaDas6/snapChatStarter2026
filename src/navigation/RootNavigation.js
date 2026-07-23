@@ -2,7 +2,7 @@ import React from "react";
 import { useAuthentication } from "../../utils/hooks/useAuthentication";
 import AuthStack from "./AuthStack";
 import UserStack from "./UserStack";
-import supabase from "../../utils/hooks/supabase";
+import { supabase } from "../../utils/hooks/supabase";
 
 export default function RootNavigation() {
   const { user } = useAuthentication();
@@ -22,7 +22,7 @@ async function devAutoLogin() {
   // EXPO_PUBLIC_DEV_EMAIL=youremail
   // EXPO_PUBLIC_DEV_PASSWORD=yourpassword
 
-  const { user, error } = await supabase.auth.signInWithPassword({
+  const { error } = await supabase.auth.signInWithPassword({
     email: process.env.EXPO_PUBLIC_DEV_EMAIL,
     password: process.env.EXPO_PUBLIC_DEV_PASSWORD,
   });
