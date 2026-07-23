@@ -9,7 +9,9 @@ export default function SettingsScreen() {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("01/01/1998"); // Default random date
-  const [profilePictureUrl, setProfilePictureUrl] = useState("");
+  const DEFAULT_AVATAR =
+    "https://image.cnbcfm.com/api/v1/image/100703713-Rubber%20duck%20in%20hk.jpg?v=1532564692&w=1600&h=900";
+  const [profilePictureUrl, setProfilePictureUrl] = useState(DEFAULT_AVATAR);
   const [initialDisplayName, setInitialDisplayName] = useState("");
   const [initialEmail, setInitialEmail] = useState("");
   const [editingDisplayName, setEditingDisplayName] = useState(false);
@@ -24,6 +26,9 @@ export default function SettingsScreen() {
   }, [user]);
 
   const fetchUserData = async () => {
+    const fallbackName = user?.email?.split("@")[0] || "User";
+    const fallbackEmail = user?.email || "";
+
     try {
       const { data, error } = await supabase
         .from("profiles") // Replace with your table name
@@ -33,18 +38,21 @@ export default function SettingsScreen() {
 
       if (error) throw error;
 
-      setDisplayName(data.username || user.email.split("@")[0]);
-      setEmail(data.email || user.email);
+      setDisplayName(data.username || fallbackName);
+      setEmail(data.email || fallbackEmail);
       setDateOfBirth(data.birthday || "01/01/1998");
-      setProfilePictureUrl(
-        data.avatar_url ||
-          "https://image.cnbcfm.com/api/v1/image/100703713-Rubber%20duck%20in%20hk.jpg?v=1532564692&w=1600&h=900",
-      ); // Default URL
-      setInitialDisplayName(data.username || user.email.split("@")[0]);
-      setInitialEmail(data.email || user.email);
+      setProfilePictureUrl(data.avatar_url || DEFAULT_AVATAR);
+      setInitialDisplayName(data.username || fallbackName);
+      setInitialEmail(data.email || fallbackEmail);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching user data:", error.message);
+      // Fall back to auth user data if profiles table is missing/unavailable
+      setDisplayName(fallbackName);
+      setEmail(fallbackEmail);
+      setInitialDisplayName(fallbackName);
+      setInitialEmail(fallbackEmail);
+      setProfilePictureUrl(DEFAULT_AVATAR);
       setLoading(false);
     }
   };
@@ -172,7 +180,7 @@ export default function SettingsScreen() {
         ) : (
           <View style={styles.profilePictureContainer}>
             <Image
-              source={{ uri: profilePictureUrl }}
+              source={{ uri: profilePictureUrl || DEFAULT_AVATAR }}
               style={styles.profilePicture}
             />
             <Button

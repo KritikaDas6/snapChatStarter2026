@@ -13,7 +13,7 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.homeButtons}>
         <TouchableOpacity
           style={[styles.button, styles.logIn]}
-          onPress={() => {
+          onPress={() => { 
             navigation.navigate("Login");
           }}
         >
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   homeIcon: {
     width: "100%",
-    heigh: 80,
+    height: 80,
     position: "absolute",
     top: 200,
     alignItems: "center",

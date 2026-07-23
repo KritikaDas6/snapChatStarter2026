@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Linking,
+  Alert,
 } from "react-native";
 import { useState } from "react";
 import { supabase } from "../../utils/hooks/supabase";
@@ -17,7 +18,6 @@ export default function SignupScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [birthday, setBirthday] = useState("");
   const [alreadyInUseButton, setAlreadyInUseButton] = useState(false);
-  //major dubbing here to figure out why auth doesnt work
   const [alreadyInUseMessage, setAlreadyInUseMessage] = useState("");
 
   function isValidDateFormat(input) {
